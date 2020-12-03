@@ -1,0 +1,6 @@
+#! /bin/bash
+
+kill $(pidof ./login-server)
+kill $(pidof ./char-server)
+kill $(pidof ./map-server)
+kill $(pidof ./save-server)

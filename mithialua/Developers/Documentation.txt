@@ -1,0 +1,64 @@
+file = io.open("warp/test.txt", "a+")
+io.output(file)
+
+for i = 1, 123 do
+io.write("15,\t"..i..",\t74,\t41,\t"..i..",\t1\n")
+io.write("41,\t"..i..",\t0,\t15,\t"..i..",\t73\n")
+end
+
+
+io.write("15,\t,\t74,\t41,\t,\t1\n")
+io.write("41,\t,\t0,\t15,\t,\t73\n")
+
+for i = 126, 133 do
+io.write("27,\t"..(i-125)..",\t74,\t41,\t"..i..",\t1\n")
+io.write("41,\t"..i..",\t0,\t27,\t"..(i-125)..",\t73\n")
+end
+
+for i = 145, 198 do
+io.write("15,\t"..(i-125)..",\t74,\t41,\t"..i..",\t1\n")
+io.write("41,\t"..i..",\t0,\t15,\t"..(i-125)..",\t73\n")
+end
+
+io.close(file)
+
+LOGS INFO
+
+CHAT
+
+0 - talk
+1 - yell
+2 - broadcast
+3 - whisper
+4 - group
+5 - path
+6 - clan
+7 - GM talk
+8 - GM broadcast
+9 - / commands
+10 - english
+11 - spanish
+12 - french
+13 - chinese
+14 - portugese
+15 - bahasa
+
+ITEM
+
+1 - bosskills 
+2 - mapchange 
+3 - itemdrop 
+4 - itempickup 
+5 - itemthrow 
+6 - itemhand *
+7 - itemuse/smoke/eat
+8 - itemexchange
+9 - itemequip 
+10 - itemunequip 
+11 - itembreak
+12 - send parcel
+13 - receive parcel
+14 - sell
+15 - buy
+16 - afk
+17 - not afk

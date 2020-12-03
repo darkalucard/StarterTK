@@ -1,0 +1,5 @@
+0,Default,default
+1,Odin's Shit,odins_shit
+2,Thor's shit,thor_shit
+3,Fuck time,fuck_time
+4,Loki's fag,lokis_fag

@@ -1,0 +1,12 @@
+Script commands
+-------------------------
+
+(battle commands)
+------------------
+ismob(#) - returns 0 if not a monster, 1 if is.  # can be any number
+paralyze # - set to 2 if paralyze, 1 if blind.  -2 to take off para, -1 to take off blind
+setrage # - Sets rage(aka Cunning, Fury) to the modifier.(#=modifier)
+setbackstab # - #=1:Backstab on, #=0:Backstab off
+setflank # - same as above
+
+(npc commands)

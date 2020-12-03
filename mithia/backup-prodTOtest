@@ -1,0 +1,20 @@
+#!/bin/bash
+
+curDate=`date +%F`;
+echo $curDate;
+mysqldump -u Jacob -pp0Op1eD5 -h x241.xanadu.fastwebserver.de --single-transaction mithia AccountRegistry Aethers Banks Character ClanBanks Clans Equipment Inventory Kills Legends NPCRegistry Parcels QuestRegistry Registry SpellBook Time > mithiaBackup-$curDate.sql;
+
+if [ $? -eq 0 ]
+then
+	echo 'Backup SQL received.';
+	mysql -u Jacob -pp0Op1eD5 -h localhost mithia < mithiaBackup-$curDate.sql;
+	
+	if [ $? -eq 0 ]
+	then
+		echo 'Backup SQL sent.';
+	else
+		echo 'Error sending backup.';
+	fi
+else
+	echo 'Error dumping backup.';
+fi

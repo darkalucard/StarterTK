@@ -1,0 +1,26 @@
+#!/bin/bash
+
+LOGINSERVER=$(ps ax | grep ./login-server | grep -v grep | wc -l)
+SAVESERVER=$(ps ax | grep ./save-server | grep -v grep | wc -l)
+CHARSERVER=$(ps ax | grep ./char-server | grep -v grep | wc -l)
+MAPSERVER=$(ps ax | grep ./map-server | grep -v grep | wc -l)
+
+if [ $LOGINSERVER -eq 0 ]
+then
+	./login-server&
+fi
+
+if [ $SAVESERVER -eq 0 ]
+then
+	./save-server&
+fi
+
+if [ $CHARSERVER -eq 0 ]
+then
+	./char-server&
+fi
+
+if [ $MAPSERVER -eq 0 ]
+then
+	./map-server&
+fi

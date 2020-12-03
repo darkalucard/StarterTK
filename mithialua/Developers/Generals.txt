@@ -1,0 +1,36 @@
+--Dark Mage
+Hair 130
+Face 219
+Armor 276
+
+
+--Panda Standin
+Armor 10026
+Crown 327
+
+--Remembers
+armor 73
+armor 119
+armor 121 --wiz
+armor 132
+armor 138-141
+armor 148
+armor 151
+armor 153
+armor 167
+armor 177
+armor 197
+armor 226
+armor 259
+armor 276
+armor 308
+armor 318
+armor 319
+armor 322
+armor 10012
+armor 10015
+armor 10112
+armor 10133
+armor 10137
+armor 10163
+armor 10263 --dmage

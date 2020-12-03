@@ -1,0 +1,8 @@
+Type 1: Question? Answer
+Type 2: Question? Target
+Type 3: Question? #,#,#,#
+Type 4: Question? #,#,#
+Type 5: Instant
+Type 6: Question? #,#
+Type 7: Question? #
+Type 8: Question? Inventory Slot

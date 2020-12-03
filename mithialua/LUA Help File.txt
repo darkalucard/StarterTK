@@ -1,0 +1,1268 @@
+PLEASE NOTE ALL FUNCTION NAMES ARE CASE SENSITIVE
+
+CURRENT FUNCTIONS LIST
+
+MAGIC
+
+cast(player/mob, target) --cast a spell
+uncast(player or mob) --spell duration end/dispel
+while_cast(player or mob[, caster]) --during duration
+on_aethers(player) --spell has aethers
+recast(player) --calcstat or relog
+passive(player) --player has spell, executes on calcStat()
+while_passive(player) --player has spell, ticks every second
+passive_on_swing(player) --cast spell when swing
+passive_on_hit(player[, target]) --casts spell when you hit	
+on_swing_while_cast(player) --effect while swinging with duration
+on_hit_while_cast(player[, target]) --effect while hitting with duration
+passive_on_takingdamage(player[, attacker]) --player has spell, before damage is dealt
+passive_on_takedamage(player[, attacker]) --player has spell, after damage is dealt
+on_takedamage_while_cast(player[, attacker]) --effect after damage is dealt, with duration	
+passive_before_death(player[, attacker]) --player has spell, before death (0 vita)
+before_death_while_cast(player[, attacker]) --effect before death while spell cast (0 vita)
+passive_after_death(player[, attacker]) --player has spell, after death (0 vita)
+after_death_while_cast(player[, attacker]) --effect after death while spell cast (0 vita)
+passive_on_kill(player, target) --player has spell, killed someone/something (0 vita)
+on_kill_while_cast(player, target) --effect after killing someone/something while spell cast (0 vita)
+on_say(player) --effect when player talks
+
+EQUIPMENT	
+	
+on_swing(player) --player swinging
+on_hit(player[, target]) --player hitting
+on_takedamage(player[, attacker]) --player taking damage
+on_death(player[, atttacker]) --player dieing
+break(player) --equipment breaking
+thrown(player[, target]) --WEAPON ONLY, for thrown weapons (bow/magic staves/etc.)
+equip(player) --equipping item (also for calc stat)
+unequip(player) --unequipping item
+
+ITEMS
+
+use(player) --using items [invSlot]
+
+GUIDE --no packets for this yet, lazy Kru
+
+run(player) --something with guides, doesn't work yet
+
+NPC
+
+on_spawn(npc) --Used when spawning an NPC via addNPC block function
+click(player, npc) --Used when clicking on an npc/mobs // walking on hidden npcs/mobs
+click2(player, npc) --Used for LOOKING at boards
+say(player, npc) --Used when players talk
+on_drop(player, npc, item) --dropping item on npc (trapstyle)
+action(npc[, owner]) --action based off timer
+endAction(npc[, owner]) --after duration is over
+
+POWERBOARD (shift-p)
+
+powerboards(player, playerToAlterColor) --Used when accessing powerboards (carnage dye system)
+
+MOB
+
+on_mount(player[, mob]) --Used for when on a mount
+after_death(mob, block) --mob died
+--thrown(mob[, target]) --Used for ranged mobs (currently commented out)
+move(mob, target) --mob movement
+attack(mob, target) --mob attacking
+onAttacked(mob, attacker) --when being hit
+on_spawn(mob) --when mob spawns
+RunAway(mob, target) -- forces the mob to run away from the player
+
+SCRIPTS
+
+Login(player) --logging in
+Logout(player) --logging out
+mapEnter(player) --entering map
+mapLeave(player) --leaving map
+mapWeather() --weather cycling (currently region 0 only)
+onScriptedTile(player) --walking, on scripted tiles
+onPickUp(player, item) --pickup item
+onDrop(player, item) --drop item
+onEquip(player) --equip item (general) [equipid]
+onTakeOff(player) --remove equipment (general) [unequipid]
+onBreak(player) --equipment breaking (general) [breakid]
+onThrow(player tempitem) --throwing item (general)[NOTE: item has no ID as it is not a formed block yet]
+onCast(player) --casting spell (general)
+onLevel(player) --leveling up (general)
+onDeathPlayer(player) --player dieing (general)
+onDeathMob(mob) --mob dieing (general)
+getTargetFacing(block, [num]blocktype, [num]priority) --returns target you are facing with parameters met
+	priority 0 = ALIVE, 1 = DEAD, 2 = ALIVE BEFORE DEAD, 3 = DEAD BEFORE ALIVE
+onLook(player, block) --player looking at stuff
+
+SPEECH
+
+say(player) --players talking
+
+FORMULAE
+
+hitCritChance(player or mob, target) --chance to hit
+swingDamage(player or mob, target) --damage from swinging
+
+PLAYER COMBAT
+
+onAttacked(player, attacker) --when being hit
+
+BOARDS
+
+check(player) --viewing special/scripted boards
+
+PLAYER
+
+addHealthExtend([num]damage, [num]sleep, [num]deduction, [num]ac, [num]ds, [num]print) --adds health
+	[num]damage --heal amount
+	[num]sleep --0 = None, 1 = Evaluate + Remove, 2 = Evaluate
+	[num]deduction --0 = None, 1 = Evaluate
+	[num]AC --0 = None, 1 = Evaluate
+	[num]DS --0 = None, 1 = Evaluate, 2 = Remove only DS (no mod to damage)
+	[num]print --0 = None, 1 = Do not print, 2 = Evaluate all "on" values and return
+removeHealthWithoutDamageNumbers([num]damage, [num]type) --removes health without displaying
+	[num]damage --damage
+	[num]type --0 = Spell, 1 = Hit, 2 = Crit
+addHealth2([num]amount, [num]type) --adds health without displaying
+	[num]amount --amount to heal
+	[num]type --0 = Spell, 1 = Hit, 2 = Crit
+removeHealthExtend([num]damage, [num]sleep, [num]deduction, [num]ac, [num]ds, [num]print) --removes health
+	[num]damage --damage
+	[num]sleep --0 = None, 1 = Evaluate + Remove, 2 = Evaluate
+	[num]deduction --0 = None, 1 = Evaluate
+	[num]AC --0 = None, 1 = Evaluate
+	[num]DS --0 = None, 1 = Evaluate, 2 = Remove only DS (no mod to damage)
+	[num]print --0 = None, 1 = Do not print, 2 = Evaluate all "on" values and return
+addMana([num]amount) --adds mana
+addManaExtend([num]amount) --adds mana after deductions (sleep, deduction, ac)
+dialogSeq({[table]graphics, [string]message[, [table]graphics, [string]message,...]},[bool]Continue) --Next/Prev Close; {graphic, text[, text, seq, ...]}, seq
+menuString([string]message, [table]options) --returns string values for option selected
+menuString2([string]message, [table]options) --returns string values for option selected
+buyDialog([string]message, [table]items) --buyable items, returns item bought with price
+showBank([string]message) --shows player's bank
+showBankAdd() --shows items addable to bank
+bankAddMoney() --add money to bank dialog
+bankWithdrawMoney() --remove money from bank dialog
+sellExtend([string]message, [table]items) --items to sell, returns table of item bought and amount
+buyExtend([string]message, [table]items, [table]prices, [table]maxamounts) --items to buy with prices and max buy amount, returns table of item bought and amount
+repairExtend() --repairs item chosen by player
+repairAll([NPC]npcblock) --repairs all items until money exhausted, npcblock does nothing
+clanShowBank([string]message) --shows clan's bank
+clanShowBankAdd() --show items addable to bank
+clanBankAddMoney() --add money to clan bank dialog
+clanBankWithdrawMoney() --remove money from clan bank dialog
+clanViewBank() --show clan banked items and amounts
+addItemExtend([num]id, [num]amount, [string]engrave) --adds item of amount wiht engrave to player
+calcThrow() --calculate range of bow
+calcRangedDamage([block]target) --calculate bow damage
+calcRangedHit([block]target) --calculates if bow hits
+activeSpells([string]spell) --returns whether a spell is active or not (true/false)
+addGold([num]amount) --adds gold to player
+removeGold([num]amount) --removes gold from player
+getEquippedDura([num]id[, [enum/num]slot]) --returns dura of item if equipped (optional slot)
+gmMsg([string]message) --sends message to all GMs
+
+PLEASE NOTE ALL CORE CALLS ARE CASE SENSITIVE
+
+GENERIC CALLS
+
+_async([pointer]block) --add cocontainer
+_asyncDone([pointer]block) --remove cocontainer
+getOfflineID([num/string]player) --returns the ID/name of an offline player
+getObjectsMap([num]map, [num]type) --does nothing.
+getObject([num]map, [num]x, [num]y) --gets object in tile
+setObject([num]map, [num]x, [num]y, [num]newval) --sets object in tile
+getTile([num]map, [num]x, [num]y) --gets tile number
+setTile([num]map, [num]x, [num]y, [num]newval) --sets tile number
+setPass([num]map, [num]x, [num]y, [num]newval) --sets passability of tile
+getPass([num]map, [num]x, [num]y) --gets passability of tile
+setPostColor([num]board, [num]post, [num]color) --sets color of post on board
+throw([int]id, [num]map, [num]startx, [num]starty, [num]endx, [num]endy, icon, color, action) --throws item i guess? not sure
+msleep([num]time) --time in milliseconds, pauses whole server :( PLEASE DONT USE THIS :P
+getWeather([num]region,[num]indoor) --gets weather for region
+setWeather([num]region,[num]indoor,[num/enum]weather) --sets weather to region
+getWeatherM([num]map) --gets weather for map
+setWeatherM([num]map,[num/enum]weather) --sets weather for map
+curYear() --gets current year
+curDay() --gets current day
+curTime() --gets current time
+curSeason() --gets current Season (string)
+realDay() --gets Day of week as number
+realHour() --gets OS hour
+realMinute() --gets OS minute
+realSecond() --gets OS second
+broadcast([num]map, [string]message) -- -1 for all maps
+
+MAP CORE CALLS
+
+getObjectsInCell([num]map, [num]x, [num]y, [enum/num]type) --returns objects in cell of specified type
+getObjectsInArea([enum/num]type) --returns objects in area of specified type
+getObjectsInSameMap([enum/num]type) --returns objects in the same map as block of specified type
+getObjectsInMap([num]map, [enum/num]type) --returns objects in the specified map of specified type
+getBlock([num]blockID) --returns block instance of the block
+sendAnimation([num]animation, [num]times) --sends a spell animation
+sendAnimationXY([num]animation, [num]x, [num]y, [num]times) --sends a spell animation to specified coordinates
+getUsers() --returns table of all online players? (not sure on this)
+delFromIDDB() --deletes ID from the map database (until server reload or readd)
+playSound([num]sound) --sends specified sound
+sendAction([num]action, [num]speed) --sends specified action with length of speed
+	1 = Attack
+	2 = Throw
+	3 = Shoot
+	4 = Pickup (Sound)
+	5 = Pickup (No Sound)
+	6 = Cast
+	7 = Smoke
+	8 = Eat
+	9 = Respect
+	10 = Triumph
+	11 = Laughter
+	12 = Grief
+	13 = Shame
+	14 = Affection
+	15 = Boredom
+	16 = Sleepiness
+	17 = Surprise
+	18 = Rage
+	19 = Sarcasm
+	20 = Shrug
+	21 = Annoyed
+	22 = Dance
+	23 = Strange
+	24 = Kiss
+	27 = Charge
+	28 = Attack (after Charge?)
+talk([num]type, [string]message) --sends a talk, not speech, packet
+	0 = Talk
+	1 = Yell
+	2 = Skill
+	3 = Talk/Skill
+msg([num]color, [string]message (, [num]target)) --target optional, needs reworked a bit. do NOT omit target for now.
+	0 = Whisper
+	2 = Minitext
+	3 = Minitext
+	4 = Yell
+	5 = Broadcast
+	8 = Popup
+	11 = Group/Path
+	12 = System
+spawn([num]id, [num]x, [num]y, [num]amount, [num]map) --spawns amount of mob(id) at specified x and y coordinates, map is optional
+addPermanentSpawn() --makes mob a permanent spawn [DOES NOTHING]
+sendSide() --updates side of mob/player for all players in area
+delete() --deletes block
+addNPC([string]yname, [num]map, [num]x, [num]y, [num]timer, [num]duration, [num]owner, [string]name) --spawns an npc with specified name on specified map/coordinates (timer/duration/owner optional)
+dropItem([num]item, [num]amount, [num]owner) --drops specified item under the block's feet
+dropItemXY([num]item, [num]amount, [num]map, [num]x, [num]y, [num]owner) --drops an item at specified coordinates
+respawn() --respawns mob
+objectCanMove([num]x, [num]y, [num]side) --returns true if can move
+objectCanMoveFrom([num]x, [num]y, [num]side) --returns true if can move from
+repeatAnimation([num]animation, [num]duration) --repeats specified animation for duration
+throw([num]x, [num]y, [num]icon, [num]color, [num]action) --throws (no flooritem) to specified x/y with icon, color and action
+selfAnimation([num/string]playerID, [num]animation, [num]times) --sends animation to player
+selfAnimationXY([num/string]playerID, [num]animation, [num]x, [num]y, [num]times) --sends animation to player at specific x/y
+sendParcel([num]receiver, [num]sender, [num]item, [num]amount[, [num]owner, [string]engrave, [num]npcflag]) --sends parcel, owner and on is optional
+
+NPC CORE CALLS
+
+move() --moves character npc in direction facing
+warp([num]m, [num]x, [num]y) --warps character npc to specified map, x, and y
+
+MOB CORE CALLS
+
+attack([num]player) --attacks player
+addHealth([num]amount, [num]caster) --adds specified amount to mob health, caster optional for on_takedamage purposes
+move() --true if mob moved
+setDuration([string]magic_yname, [num]duration, [num]caster, [num]recast) --caster and recast optional. Use Player.ID for caster and 1 to initiate a recast
+moveIntent() --true if next to block to attack
+hasDuration([string]magic_yname) --checks for magic running
+hasDurationID([string]magic_yname, [num]caster) --checks for magic running from specific caster
+removeHealth([num]amount, [num]caster) --removes health, caster optional
+flushDuration([[num]minSpellID, [[num]maxSpellID]]) --uncast all spells (no parameters), one spell (one parameter) or a range of spells (two parameters)
+flushDurationNoUncast([[num]minSpellID, [[num]maxSpellID]]) --uncast without calling "uncast" for all spells (no parameters), one spell (one parameter) or a range of spells (two parameters)
+durationAmount([string]magic_yname) --returns duration amount of spell
+checkThreat([num]playerID) --returns amount of threat, use a for loop and table to retrieve all amounts
+sendHealth(target.damage, target.hit) --use these or calc yourself with -> (damage = damage, hit = 1 HIT, 2 CRIT)
+warp([num]map, [num]x, [num] y) --warps mob to specified map with coordinates x/y
+moveGhost() --true if mob moved (used for ghosts to go through walls)
+callBase([string]script) --calls base mob script based on mob_yname
+checkMove() --check if a mob can move without moving it
+setIndDmg() --set individual damage (adds to current)
+setGrpDmg() --set group damage (adds to current)
+getIndDmg() --returns individual's damage
+getGrpDmg() --returns group's damage
+
+PLAYER CORE CALLS
+
+freeAsync() --frees the cocontainer
+showHealth([num]type, [num]damage) --damages player and displays damage numbers
+addHealth([num]amount, [num]caster) --adds health, caster optional
+removeHealth([num]amount, [num]caster) --removes health, caster optional
+sendHealth(target.damage, target.hit) --use these or calc yourself with -> (damage = damage, hit = 1 HIT, 2 CRIT)
+addMagic([num]amount) --adds magic
+die() --kills player
+resurrect() --resurrect player
+setTimeValues() --sets health values
+getTimeValues() --returns health values
+setPK([num]playerID) --sets pk id for player
+getPK([num]playerID) --gets pk id from player
+status() --forces player to status screen
+sendStatus() --updates status
+calcStat() --recalculates status
+updateState() --updates player state, used for stop/slumb/snare/etc.
+lookAt() --looks at target
+giveXP([num]amount) --moved this function to core, works same as before
+sendMinitext([string]message) --status box message
+speak([string]message, [num]type) --sends speak packet, type: 0 = normal, 1 = shout, 2 = skill
+broadcast([string]message, [int]map) --please use this for player broadcasting for logging
+sendMail([string]to, [string]subject, [string]body) --these are all STRINGS.
+showBoard([num]board) --displays board
+showPost([num]board, [num]post) --use in conjunction with showBoard([num]board) or it will not work, show's post from board
+refresh() --refreshes player screen
+popUp([string]text) --sends popup to user, ok only
+input([string]message) --returns input
+dialog([string]message, [table]graphic) --standard dialog, close only message max length is 301 characters.
+menu([string]message, [table]options) --few options, returns location of selection chosen [OK, UP, CLOSE]
+menuSeq([string]text, [table]options) --few options, returns location of selection chosen [OK, NEXT, PREV, CLOSE]
+buy([string]message, [table]items, [table]values, [table]displayname, [table]buytext) --buy dialog, use empty tables for displayname/buytext if you wish; cannot be omitted
+sell([string]message, [table]items) --sell dialog
+sell2([string]message, [table]items) --sell dialog again? not sure the difference
+logBuySell([num]item, [num]amount, [num]gold, [num]buy/sell flag) --adds to buy/sell log, 0 sell, 1 buy
+setDuration([string]magic_yname, [num]duration, [num]caster, [num]recast) --caster/recast optional. set recast = 1 for spells like guardian
+hasDuration([string]magic_yname) --checks for duration
+hasDurationID([string]magic_yname, [num]casterID) --checks for duration from specific caster
+getDuration([string]magic_yname) --gets duration of spell
+getDurationID([string]magic_yname, [num]casterID) --gets duration of spell from specific caster
+getAllDurations() --gets ynames of all spells currently cast
+flushDuration([[num]minSpellID, [[num]maxSpellID]]) --uncast all spells (no parameters), one spell (one parameter) or a range of spells (two parameters)
+flushDurationNoUncast([[num]minSpellID, [[num]maxSpellID]]) --uncast without calling "uncast" for all spells (no parameters), one spell (one parameter) or a range of spells (two parameters)
+getCasterID() --returns the caster ID of spell
+setAether([string]magic_yname, [num]duration) --sets aether
+hasAether([string]magic_yname) --checks for aethers
+getAether([string]magic_yname) --gets time left on aether
+flushAether() --resets all aethers
+hasSpace([num]item, [num]amount, [num]owner, [string]engrave) --returns true if player has space for item
+addItem([num/string]Item_yname, [num]amount, [num]dura, [num]owner, [string]engrave) --adds item to player, owner and engrave optional
+getInventoryItem([num]slot) --returns item in slot as BOUND ITEM
+hasItem([num/string]Item_yname, [num]amount) --returns true if has item, amount lacking if not
+hasItemDura([num/string]Item_yname, [num]amount) --returns true if has item with full dura, amount lacking if not
+removeItem([num/string]item, [num]amount[, [num]type]) --removes specified amount from item in inventory
+removeItemSlot([num]slot, [num]amount[, [num]type]) --removes specified amount from inventory slot
+removeItemDura([num/string]item[, [num]type]) --removes item with full dura from inventory
+	type:
+ 0 = Remove 5 = Shot 10 = Sold
+ 1 = Drop 6 = Used 11 = Removed
+ 2 = Eat  7 = Posted 12 = *Item name*
+ 3 = Smoke 8 = Decayed 13 = Broke
+ 4 = Throw 9 = Gave
+getEquippedItem([enum]slot) --returns item in slot as BOUND ITEM
+	0 = weapon
+	1 = armor
+	2 = shield
+	3 = helm
+	4 = left hand
+	5 = right hand
+	6 = left script
+	7 = right script
+	8 = face
+	9 = crown
+	10 = mantle
+	11 = necklace
+	12 = boots
+	13 = coat
+	(EQ_WEAP, EQ_ARMOR, EQ_SHIELD, EQ_HELM, EQ_LEFT, EQ_RIGHT, EQ_SCRIPT1, EQ_SCRIPT2, EQ_FACEACC, EQ_CROWN, EQ_MANTLE, EQ_NECKLACE, EQ_BOOTS, EQ_COAT)
+hasEquipped([table]items) --checks for item equipped within a given table
+pickUp([num]flooritemID) --picks up specified flooritem
+equip() --equips item in equipid
+takeOff() --takes off item in takeoffid
+throwItem() --throws item in throwid
+updateInv() --updates user inventory
+addLegend([string]text, [string]name, [num]icon, [num]color) --adds legend to player
+hasLegend([string]name) --checks if player has a legend
+getLegend([string]name) --returns the text of legend if it exists
+removeLegendbyName([string]name) --removes legend with given name
+removeLegendbyColor([num]color) --removes legend with given color
+warp([num]map, [num]x, [num]y) --warps to specified map with coordinates of x/y
+move() --move in direction (probably doesn't work yet)
+respawn() --adds block back to map (not sure if it works yet)
+addClan([string]name) --creates clan
+killCount([num/string]mob) --returns amount killed
+killRank([num/string]mob) --returns slot of last kill
+flushKills([[num/string]mob]) --empties kill storage [of specified monster]
+getUnknownSpells() --returns table of unknown spells
+addSpell([string]magic_yname) --add spell
+removeSpell([num]magicID) --remove spell
+hasSpell([string]magic_yname) --has spell
+getSpells() --returns table of magic IDs
+getSpellName() --returns table of spell names for menu
+mapSelection([string]message, [table]) --not sure what this does. test and find out!
+deductArmor() --deducts armor durability
+deductDura([num]equipment, [num]amount) --deduct given amount from specified equipment
+deductDuraInv([num]slot, [num]amount) --deduct given amount from specified inventory slot
+durationAmount([string]magic_yname) --returns duration of spell
+addGuide([string]guide) --adds guide to user, doesn't work yet
+delGuide([string]guide) --deletes guide from user, doesn't work yet
+powerBoard() --pulls up powerboard
+lock() --locks player keyboard/mouse
+unlock() --unlocks player keyboard/mouse
+swing() --makes player swing
+checkBankItems([num]slot) --gets bank item slot
+checkBankAmounts([num]slot) --gets bank amount slot
+checkBankOwners([num]slot) --gets bank owner slot
+checkBankEngraves([num]slot) --gets bank engrave slot
+bankDeposit([num]item, [num]amount, [num]owner, [string]engrave) --deposits item, owner/engrave optional
+bankWithdraw([num]item, [num]amount, [num]owner, [string]engrave) --withdraws item, owner/engrave optional
+bankCheckAmount([num]item, [num]amount, [num]owner, [string]engrave) --retrieves amount banked, owner/engrave optional
+addThreat([num]mobID, [num]amount) --adds specified threat amount to mob from player
+setThreat([num]mobID, [num]amount) --sets threat to specified amount to mob from player
+addThreatGeneral([num]amount) --adds specified threat amount to all mobs in area from player
+getClanItems([num]slot) --gets clan bank item slot
+getClanAmounts([num]slot) --gets clan bank amount slot
+clanBankDeposit([num]item, [num]amount) --depositis item
+clanBankWithdraw([num]item, [num]amount) --withdraws item
+checkClanItemAmounts([num]item, [num]amount) --retrieves amount banked
+getCreationItems([num]len) --gets creation items
+getCreationAmounts([num]len, [num]itemID) --gets creation amounts
+getParcel() --returns a parcel item if any exist
+getParcelList() --will return a table of parcels (do not use yet)
+removeParcel([num]senderid, [num]item, [num]amount, [num]pos[, [num]owner, [string]engrave, [num]npcflag]) --removes parcel from SQL, owner and on is optional; please add for logging purposes
+expireItem() --use in conjunction with playertimer to expire items.
+changeView([num]x, [num]y) --changes the player's view, x = 0-16, y = 0-14 (left to right, top to bottom)
+
+PLEASE NOTE ALL ATTRIBUTES ARE CASE SENSITIVE
+
+REGISTRIES
+
+registry --for players, npcs, and mobs (npcs and mobs temp)
+mapRegistry --for players, npcs, and mobs
+gameRegistry --for players, npcs, and mobs
+accountRegistry --for players
+
+PLAYER GET ATTRIBUTES
+
+[table]group --player's group
+[num]id --player's id
+[num]groupID --player's group id
+[num]health --current health
+[num]magic --current magic
+[num]level --level
+[string]name --name
+[string]title --title
+[num]maxHealth --max health
+[num]maxMagic --max magic
+[num]lastHealth --last health (Substitute)
+[num]rage --rage multiplier
+[string]clanTitle --clan title
+[bool]polearm --polearm equipped
+[num]clan --clanID
+[num]gmLevel --GM level
+[num]lastClick --last clicked NPC/Mob
+[num]class --classID   --0=novice 1=warrior 2=rogue 3=mage 4=poet 5=GM 6+=subpath
+[num]baseClass --base classID
+[num]totem --player's totem
+[num]mark --markID
+[num]baseHealth --base health
+[num]baseMagic --base magic
+[num]exp --current exp
+[num]expCounter --unsure, cannot find usage.
+[num]state --current state:
+	-1 = gone
+	0 = normal
+	1 = ghost
+	2 = invisible
+	3 = mount
+	4 = disguise
+	(PC_ALIVE, PC_DIE, PC_INVIS, PC_HORSE, PC_DISGUISE)
+[num]face --faceID
+	<200 = attached hair
+	>=200 = seperate hair
+[num]hair --hairID
+[num]hairColor --hair color
+[num]faceColor --face color
+[num]armorColor --armor dye
+[bool]paralyzed --paralyzed?
+[bool]blind --blind?
+[bool]drunk --drunk?
+[num]board --boardID
+[bool]boardDel --can delete from board?
+[bool]boardWrite --can write to board?
+[bool]boardShow --can see board?
+[num]sex --sex number:
+	0 = male
+	1 = female
+[num]ping --player ping, does nothing
+[num]pbColor --powerboard color
+[num]coRef --used with async
+[num]optFlags --option flags
+[num]uflags --user flags
+[num]settings --settings
+[num]side --current side:
+	0 = up
+	1 = right
+	2 = down
+	3 = left
+[num]grace --current grace
+[num]might --current might
+[num]will --current will
+[num]baseGrace --base grace
+[num]baseMight --base might
+[num]baseWill --base will
+[num]ac --current AC
+[num]dam --current dam
+[num]hit --current hit
+[num]miss --current miss
+[num]pierce --current pierce
+[num]sleep --sleep multiplier
+[num]attackSpeed --attackspeed
+[num]baseAttackSpeed --base attack speed
+[string]question --question from last spell cast
+[num]enchant --enchant multiplier
+[string]speech --last thing player said
+[num]money --current money
+[num]confused --confused?
+[num]skinColor --current skin color
+[num]target --target's ID
+[num]deduction --deduction multiplier
+[num]speed --moving speed
+[num]baseSpeed --base moving speed
+[num]spouse --spouseID
+[num]disguise --disguiseID
+[num]disguiseColor --disguise color
+[num]attacker --attackerID
+[num]invis --invis multiplier
+[num]damage --damage
+[num]crit --crit modifier
+[num]critChance --miss/hit/crit?
+[num]critMult --crit multiplier
+[num]rangeTarget --ranged targetID
+[num]maxSlots --max bank slots
+[num]maxPerSlot --max amount per slot
+[num]maxBankMoney --max bank money
+[num]bankMoney --current bank money
+[num]threat --deprecated
+[bool]snare --snared?
+[bool]silence --silenced?
+[bool]extendHit --extended hitting (polearm +  normal)
+[bool]afk --afk?
+[num]afkTime --time from last action (1:10s)
+[num]afkTimeTotal --time spent afk
+[string]afkMessage --afk message
+[string]className --class Name
+[string]classNameMark --class's marked name
+[num]regen --regen modifier
+[num]baseRegen --base regen modifier
+[num]vRegen --vita regen modifier
+[num]baseVRegen --base vita regen modifier
+[num]vRegenAmount --vregen amount
+[num]mRegen --mana regen modifier
+[num]baseMRegen --base mana regen modifier
+[num]mRegenAmount --mregen amount
+[num]ap --attribute points
+[num]sp --skill points
+[num]minDam --current minimum damage
+[num]maxDam --current maximum damage
+[num]baseMinDam --base minimum damage
+[num]baseMaxDam --base maximum damage
+[num]talkType --type of talking:
+	0 = talk
+	1 = shout
+	2 = skill
+	3 = talk/skill
+[string]f1Name --name of f1 npc
+[num]weapDuraMod --weapon durability modification
+[num]armorDuraMod --armor durability modification
+[num]equipID --last equipped item
+[num]takeOffID --last item taken off
+[num]breakID --last item broken
+[num]invSlot --inventory slot last used (CHANGING equipment and throwing item)
+[num]pickUpType --type of pickup (forgot values, please test and update)
+[num]parry --current parry
+[num]block --current block
+[num]dodge --current dodge
+[bool]spotTraps --can see trap locations
+[num]fury --fury multiplier
+[num]baseAC --base armor class
+[num]maxInv --max inventory slots
+[num]gfxFace --face gfx
+[num]gfxHair --hair gfx
+[num]gfxHairC --hair color gfx
+[num]gfxFaceC --face color gfx
+[num]gfxSkinC --skin color gfx
+[num]gfxDye --dye gfx
+[num]gfxWeap --weapon gfx
+[num]gfxWeapC --weapon color gfx
+[num]gfxArmor --armor gfx
+[num]gfxArmorC --armor color gfx
+[num]gfxShield --shield gfx
+[num]gfxShieldC --shield color gfx
+[num]gfxHelm --helm gfx
+[num]gfxHelmC --helm color gfx
+[num]gfxCape --mantle gfx
+[num]gfxCapeC --mantle color gfx
+[num]gfxCrown --crown gfx
+[num]gfxCrownC --crown color gfx
+[num]gfxFaceA --faceAcc gfx
+[num]gfxFaceAC --faceAcc color gfx
+[num]gfxFaceAT --faceAccTwo gfx
+[num]gfxFaceATC --faceAccTwo color gfx
+[num]gfxBoots --boot gfx
+[num]gfxBootsC --boot color gfx
+[num]gfxNeck --necklace gfx
+[num]gfxNeckC --necklace color gfx
+[string]gfxName --name gfx
+[bool]gfxClone --clone gfx
+[num]PK --pk value
+	0 = Off
+	1 = PK
+	2 = Bounty
+[num]killedBy --ID of player/mob that killed target
+[num]killsPK --pk kills
+[num]killsPVP --pvp kills
+[num]durationPK --PK duration
+[num]protection --protection
+[num]baseProtection --base protection
+[num]resist --resistance
+[num]baseResist --base resistance
+[num]physDeduct --melee damage deduction
+[num]basePhysDeduct --base melee damage deduction
+[num]createCount --number of items in creation window
+[num]timerInterval --number of intervals that have passed for script timer
+[num]dmgShield --damage shield, absorbs damage
+[num]steps --steps taken
+[num]dmgDealt --damage dealt in total
+[num]dmgTaken --damage taken in total
+[num]onlineTime --time online in seconds
+[num]emote --emote used
+[bool]mute --cannot talk
+[num]wisdom --wisdom
+[num]baseWisdom --baseWisdom
+[bool]deathFlag --player should die
+
+PLAYER SET ATTRIBUTES
+
+[num]npcGraphic --disguise or floor item graphic, used for dialogs
+[num]npcColor --color of disguise or floor item graphic, used for dialogs
+[num]lastClick --last clicked mob/npc
+[string]title --title
+[string]clanTitle --clan title
+[num]maxHealth --max health
+[num]maxMagic --max magic
+[bool]polearm --polearm equipped
+[num]rage --rage multiplier
+[num]clan --clan number
+[num]gmLevel --GM level
+[num]class --class number
+[num]totem --player's totem
+[num]mark --mark number
+[num]health --current health
+[num]magic --current magic
+[num]baseHealth --base health
+[num]baseMagic --base magic
+[num]lastHealth --set last health (Substitute)
+[num]exp --current experience
+[num]expCounter --not sure, no reference test and add.
+[num]state --new state:
+	-1 = gone
+	0 = normal
+	1 = ghost
+	2 = invisible
+	3 = mount
+	4 = disguise
+	(PC_ALIVE, PC_DIE, PC_INVIS, PC_HORSE, PC_DISGUISE)
+[num]hair --hair number
+[bool]paralyzed --paralyze player?
+[bool]blind --blind player?
+[bool]drunk --drunk player?
+[num]sex --sex number:
+	0 = male
+	1 = female
+[num]uflags --user flags
+[bool]backstab --backstab
+[bool]flank --flank
+[num]ac --current armor class
+[num]dam --current dam
+[num]hit --current hit
+[num]miss --current miss
+[num]pierce --current pierce
+[num]might --current might
+[num]will --current will
+[num]grace --current grace
+[num]baseMight --base might
+[num]baseWill --base will
+[num]baseGrace --base grace
+[bool]boardDel --player can delete?
+[bool]boardWrite --player can write?
+[bool]boardShow --player can see?
+[num]side --new side:
+	0 = Up
+	1 = Right
+	2 = Down
+	3 = Left
+[num]sleep --sleep modifier
+[num]attackSpeed --attackspeed
+[num]baseAttackSpeed --base attack speed
+[string]speech --alter what player will say
+[num]enchant --enchant modifier
+[num]money --current money
+[num]settings --user settings
+[bool]confused --confuse player?
+[num]skinColor --skin color number
+[num]target --target
+[num]deduction --deduction modifier
+[num]hairColor --hair color number
+[num]face --face number (face with set hair: 0-199, face with no set hair: 200+)
+[num]faceColor --face color number
+[num]speed --new speed
+[num]baseSpeed --base speed
+[num]armorColor --armor color number
+[num]spouse --spouse
+[num]disguise --disguise number
+[num]disguiseColor --disguise color number
+[num]attacker --attacker
+[num]invis --invis modifier
+[num]coContainer --used with async, cocontainer
+[num]level --current level
+[num]rangeTarget --ranged target
+[num]maxSlots --max bank slots
+[num]maxPerSlot --max amount per slot
+[num]maxBankMoney --max bank money
+[num]bankMoney --current bank money
+[num]threat --deprecated
+[bool]snare --snare player?
+[bool]silence --silence player?
+[bool]extendHit --extended hitting (polearm + normal)
+[bool]afk --afk player?
+[string]afkMessage --player afk message
+[num]optFlags --option flags
+[num]regen --regen modifier
+[num]baseRegen --base regen modifier
+[num]vRegen --vita regen modifier
+[num]baseVRegen --base vita regen modifier
+[num]mRegen --mana regen modifier
+[num]baseMRegen --base mana regen modifier
+[num]ap --attribute points
+[num]sp --skill points
+[num]talkType --type of talk
+[string]f1Name --name of f1 npc
+[num]weapDuraMod --weapon durability modifier
+[num]armorDuraMod --armor durability modifier
+[num]crit --crit modifier
+[num]critChance --miss/hit/crit
+[num]critMult --crit multiplier
+[num]damage --damage
+[num]baseMinDam --base minimum damage
+[num]baseMaxDam --base maximum damage
+[num]parry --parry
+[num]block --block
+[num]dodge --dodge
+[bool]spotTraps --can see trap locations
+[num]fury --fury multiplier
+[num]baseAC --base armor class
+[num]maxInv --max inventory slots
+[num]gfxFace --face gfx
+[num]gfxHair --hair gfx
+[num]gfxHairC --hair color gfx
+[num]gfxFaceC --face color gfx
+[num]gfxSkinC --skin color gfx
+[num]gfxDye --dye gfx
+[num]gfxWeap --weapon gfx
+[num]gfxWeapC --weapon color gfx
+[num]gfxArmor --armor gfx
+[num]gfxArmorC --armor color gfx
+[num]gfxShield --shield gfx
+[num]gfxShieldC --shield color gfx
+[num]gfxHelm --helm gfx
+[num]gfxHelmC --helm color gfx
+[num]gfxCape --mantle gfx
+[num]gfxCapeC --mantle color gfx
+[num]gfxCrown --crown gfx
+[num]gfxCrownC --crown color gfx
+[num]gfxFaceA --faceAcc gfx
+[num]gfxFaceAC --faceAcc color gfx
+[num]gfxFaceAT --faceAccTwo gfx
+[num]gfxFaceATC --faceAccTwo color gfx
+[num]gfxBoots --boot gfx
+[num]gfxBootsC --boot color gfx
+[num]gfxNeck --necklace gfx
+[num]gfxNeckC --necklace color gfx
+[num]gfxName --name gfx
+[bool]gfxClone --clone gfx
+[num]PK --pk setting
+	0 = Off
+	1 = PK
+	2 = Bounty
+[num]killedBy --killed by player/mob
+[num]protection --protection
+[num]baseProtection --base protection
+[num]resist --resistance
+[num]baseResist --base resistance
+[num]physDeduct --melee damage deduction
+[num]basePhysDeduct --base melee damage deduction
+[num]dmgShield --damage shield, absorbs damage
+[num]steps --steps taken
+[num]dmgDealt --damage dealt in total
+[num]dmgTaken --damage taken in total
+[num]onlineTime --time online in seconds
+[bool]mute --cannot talk (true/false)
+[bool]deathFlag --player should die
+
+MOB GET ATTRIBUTES
+
+[num]state --mob's state:
+	0 = alive
+	1 = dead
+	2 = paralyzed
+	3 = blind
+	4 = attacking
+	(MOB_ALIVE, MOB_DEAD, MOB_PARA, MOB_BLIND, MOB_HIT)
+[num]startx --starting x
+[num]starty --starting y
+[num]startm --starting map
+[num]mobID --returns id from mobdb
+[num]id --returns id from spawndb
+[num]behavior --mob's behavior:
+	0 = passive
+	1 = aggressive
+	2 = stationary
+	3 = floor
+	(MOB_NORMAL, MOB_AGGRESSIVE, MOB_STATIONARY)
+[num]aiType --mob's ai:
+	0 = basic
+	1 = normal
+	2 = hard
+	3 = boss
+	4 = custom
+[num]side --mobs side:
+	0 = Up
+	1 = Right
+	2 = Down
+	3 = Left
+[string]name --mob's display name
+[bool]paralyzed - paralyzed? (no movement or spells)
+[bool]blind - blind? (cannot see)
+[num]hit --Hit stat
+[num]miss --miss
+[num]baseMiss --base miss (for mob dispel or whatever else)
+[num]pierce --pierce
+[num]basePierce --base pierce (for mob dispel or whatever else)
+[num]level --level
+[num]minDam --min damage
+[num]maxDam --max damage
+[num]will --will stat
+[num]grace --grace stat
+[num]might --might stat
+[num]health --current health
+[num]maxHealth --max health
+[num]baseHealth --base health
+[num]lastHealth --last health amount (Substitute)
+[num]magic --current magic
+[num]maxMagic --max magic
+[num]baseMagic --base magic
+[num]ac --current armor class
+[num]baseAc --base armor class
+[num]attacker --current attacker
+[bool]confused --confused? (not working)
+[num]owner --mob's owner
+[num]sleep --sleep modifier
+[num]target --current target
+[num]confuseTarget --target while confused
+[num]deduction --damage deduction in % (1 = 100%, float value)
+[num]sound --attack sound
+[num]damage --damage last dealt
+[num]crit --crit modifier
+[num]critChance --miss, hit or crit
+[num]critMult --crit multiplier
+[num]rangeTarget --ranged target
+[num]newMove --movement speed higher/lower than baseMove in milliseconds
+[num]baseMove --base move speed in milliseconds
+[num]newAttack --attack speed higher/lower than baseAttack in milliseconds
+[num]baseAttack --base attack speed in milliseconds
+[bool]snare --snare? (no movement, but casts ok)
+[num]lastAction --time of last action performed
+[bool]summon --summon?
+[num]dodge --mob dodge
+[num]parry --mob parry
+[num]block --mob block
+[num]protection --mob protection
+[num]resist --mob resistance
+[num]baseResist --mob base resist
+[num]retDist --distance away from start before returning
+[bool]returning --is mob returning?
+[num]bossType --type of boss
+	0 = none
+	1 = rare
+	2 = semi
+	3 = boss
+	4 = epic
+	5 = godly
+[num]race --mob race
+[bool]undead --is undead?
+	0 = default
+[num]dmgShield --damage shield, absorbs damage
+[num]physDeduct --melee damage deduction
+[num]dmgDealt --damage dealt
+[num]dmgTaken --damage taken
+[num]seeInvis --see invis level
+[num]color --look color
+
+MOB SET ATTRIBUTES
+
+[num]side --new side:
+	0 = Up
+	1 = Right
+	2 = Down
+	3 = Left
+[num]time --slow down or speed up a mob spawn/move/attack
+[bool]paralyzed --paralyzed mob? (true/false)
+[bool]blind --blind mob? (true/false)
+[num]health --new current health
+[num]maxHealth --new max health
+[num]magic --new current magic
+[num]maxMagic --new max magic
+[num]lastHealth --set last health value (Substitute)
+[num]ac --new current ac
+[num]miss --new miss
+[num]pierce --new pierce
+[num]attacker --new attacker
+[bool]confused --confused (true/false, not working)
+[num]owner --new owner
+[num]sleep --sleep modifier
+[num]target --new target
+[num]confuseTarget --new confusion target
+[num]deduction --damage deduction in % (1 = 100%, float value)
+[num]state --new state:
+	0 = alive
+	1 = dead
+	2 = paralyzed
+	3 = blind
+	4 = attacking
+	(MOB_ALIVE, MOB_DEAD, MOB_PARA, MOB_BLIND, MOB_HIT)
+[num]rangeTarget --new ranged target
+[num]newMove --movement speed higher/lower than baseMove in milliseconds
+[num]newAttack --attack speed higher/lower than baseAttack in milliseconds
+[bool]snare --snare mob? (true/false)
+[num]lastAction --set time of last action performed
+[num]crit --crit modifier
+[num]critChance --miss, hit or crit
+[num]critMult --crit multiplier
+[num]damage --damage
+[bool]summon --summon?
+[num]resist --new resist
+[bool]returning --returning?
+[num]dmgShield --damage shield, absorbs damage
+[num]dmgDealt --damage dealt
+[num]dmgTaken --damage taken
+[num]gfxFace --face gfx
+[num]gfxHair --hair gfx
+[num]gfxHairC --hair color gfx
+[num]gfxFaceC --face color gfx
+[num]gfxSkinC --skin color gfx
+[num]gfxDye --dye gfx
+[num]gfxWeap --weapon gfx
+[num]gfxWeapC --weapon color gfx
+[num]gfxArmor --armor gfx
+[num]gfxArmorC --armor color gfx
+[num]gfxShield --shield gfx
+[num]gfxShieldC --shield color gfx
+[num]gfxHelm --helm gfx
+[num]gfxHelmC --helm color gfx
+[num]gfxCape --mantle gfx
+[num]gfxCapeC --mantle color gfx
+[num]gfxCrown --crown gfx
+[num]gfxCrownC --crown color gfx
+[num]gfxFaceA --faceAcc gfx
+[num]gfxFaceAC --faceAcc color gfx
+[num]gfxFaceAT --faceAccTwo gfx
+[num]gfxFaceATC --faceAccTwo color gfx
+[num]gfxBoots --boot gfx
+[num]gfxBootsC --boot color gfx
+[num]gfxNeck --necklace gfx
+[num]gfxNeckC --necklace color gfx
+[num]gfxName --name gfx
+[bool]gfxClone --clone gfx
+
+ITEM GET ATTRIBUTES
+
+[num]vita --vita added
+[num]mana --mana added
+[num]dam --dam added
+[num]price --value
+[num]sell --sell price
+[string]name --name
+[string]yname --yname
+[num]id --item id
+[num]maxAmount --max stackable
+[num]maxDura --max dura
+[num]type --item type:
+	0 = eat
+	1 = use
+	2 = smoke
+	3 = weapon
+	4 = armor
+	5 = shield
+	6 = helm
+	7 = left hand
+	8 = right hand
+	9 = left script
+	10 = right script
+	11 = face
+	12 = crown
+	13 = mantle
+	14 = necklace
+	15 = boots
+	16 = coat
+	17 = hand (not sure on this)
+	18 = etc.
+	19 = usespc (not sure on this)
+	20 = trap
+[bool]depositable --can deposit
+[bool]exchangeable --can exchange
+[bool]droppable --can drop
+[num]sound --sound
+[num]minDmg --min damage
+[num]maxDmg --max damage
+[num]attackSpeed --attack speed
+	< -24 = Speedhacking
+	>= -24 and < -16 = Extremely Fast
+	>= -16 and < -8 = Very Fast
+	>= -8 and < 0 = Fast
+	0 = Normal
+	> 0 and <= 8 = Slow
+	> 8 and <= 16 = Very Slow
+	> 16 and <= 24 = Extremely Slow
+	> 24 = Gooey
+[num]wisdom --wisdom
+[num]thrown --thrown
+[num]con --constitution?
+[num]event --event item
+[num]level --level required
+[num]might --might
+[num]grace --grace
+[num]will --will
+[num]sex --sex
+	0 = male
+	1 = female
+	2 = all
+[num]ac --armor class
+[num]hit --hit
+[num]rank --rank (deprecated)
+[num]reqVita --required vita
+[num]reqMana --required mana
+[num]unique --amount able to be carried in inventory at any given time, includes equipment
+[num]regen --regen
+[num]ethereal --armor takes damage or not
+[num]dodge --dodge
+[num]parry --parry
+[num]block --block
+[num]soundHit --sound on hit
+[num]class --class required
+[string]className --class name
+[num]protection --protection
+[num]reqMight --required might
+[num]reqGrace --required grace
+[num]reqWill --required will
+[num]resist --spell resistance
+[num]vRegen --vita regen modifier
+[num]mRegen --mana regen modifier
+[num]physDeduct --melee damage deduction
+[num]time --lasting time of item
+[num]look --look
+[num]lookC --look color
+
+BOUND ITEM GET ATTRIBUTES
+
+[num]amount --amount
+[num]dura --durability
+[num]owner --owner
+[string]realName --display name
+[num]timeLeft --remaining time of item
+anything in ITEM GET ATTRIBUTES
+
+BOUND ITEM SET ATTRIBUTES
+
+[num]id --change item to new item
+[num]amount --amount
+[num]dura --durability
+[num]owner --owner
+[string]realName --display name
+[num]timeLeft --remaining time of item (for renewing)
+
+FLOORITEM GET ATTRIBUTES
+
+[num]id --item id
+[num]amount --amount
+[num]lastAmount --previous amount before addition
+
+FLOORITEM SET ATTRIBUTES
+
+[num]amount --amount
+
+PARCEL GET ATTRIBUTES
+
+[num]id --item id
+[num]amount --amount
+[num]dura --durability (this will always be 100%)
+[num]owner --owner id
+[string]realName --engrave
+[num]timeLeft --remaining time of item
+[num]sender --sender id
+[num]pos --position in sql
+[num]npcFlag --sent by npc or not
+anything in ITEM GET ATTRIBUTES
+
+NPC GET ATTRIBUTES
+
+[num]id --char npc id
+[num]look --npc look
+[num]lookColor --npc look color
+[string]name --display name
+[string]yname --yname
+[num]side --side facing
+	0 = up
+	1 = right
+	2 = down
+	3 = left
+[num]state --state
+	0 = alive
+	1 = dead
+	2 = invisible
+	3 = mounted
+	4 = monster
+[num]sex --sex
+	0 = male
+	1 = female
+[num]face --face
+[num]faceColor --face color
+[num]hair --hair
+[num]hairColor --hair color
+[num]skinColor --skin color
+[num]armorColor --armor color
+[num]lastAction --time of last action in seconds
+[num]actionTime --current timer interval
+[num]duration --current duration interval
+[num]owner --owner
+[num]startM --start map
+[num]startX --start x
+[num]startY --start y
+
+NPC SET ATTRIBUTES
+
+[num]side --new side
+	0 = up
+	1 = right
+	2 = down
+	3 = left
+[num]look --npc look
+[num]lookColor --npc look color
+[num]state --new state
+	0 = alive
+	1 = dead
+	2 = invisible
+	3 = mounted
+	4 = monster
+[num]sex --new sex
+	0 = male
+	1 = female
+[num]face --new face
+[num]faceColor --new face color
+[num]hair --new hair
+[num]hairColor --new hair color
+[num]skinColor --new skin color
+[num]armorColor --new armor color
+[num]lastAction --new last action
+[num]actionTime --new timer interval
+[num]duration --new duration interval
+[num]owner --new owner
+[num]gfxFace --face gfx
+[num]gfxHair --hair gfx
+[num]gfxHairC --hair color gfx
+[num]gfxFaceC --face color gfx
+[num]gfxSkinC --skin color gfx
+[num]gfxDye --dye gfx
+[num]gfxWeap --weapon gfx
+[num]gfxWeapC --weapon color gfx
+[num]gfxArmor --armor gfx
+[num]gfxArmorC --armor color gfx
+[num]gfxShield --shield gfx
+[num]gfxShieldC --shield color gfx
+[num]gfxHelm --helm gfx
+[num]gfxHelmC --helm color gfx
+[num]gfxCape --mantle gfx
+[num]gfxCapeC --mantle color gfx
+[num]gfxCrown --crown gfx
+[num]gfxCrownC --crown color gfx
+[num]gfxFaceA --faceAcc gfx
+[num]gfxFaceAC --faceAcc color gfx
+[num]gfxFaceAT --faceAccTwo gfx
+[num]gfxFaceATC --faceAccTwo color gfx
+[num]gfxBoots --boot gfx
+[num]gfxBootsC --boot color gfx
+[num]gfxNeck --necklace gfx
+[num]gfxNeckC --necklace color gfx
+[num]gfxName --name gfx
+[bool]gfxClone --clone gfx
+
+MAP GET ATTRIBUTES
+
+[num]x --block's x
+[num]y --block's y
+[num]m --block's map
+[num]xmax --map's max x
+[num]ymax --map's max y
+[num]blType --block's type:
+	1 = player
+	2 = mob
+	3 = npc
+	4 = item
+	(BL_PC, BL_MOB, BL_NPC, BL_ITEM)
+[num]ID --block's ID
+[string]mapTitle --map title
+[num]bgm --map bgm
+[num]pvp --map pvp value
+	0 = off
+	1 = pvp
+	2 = pk
+[bool]spell --map can use spells
+[num]light --light number
+[num]weather --weather number:
+	0 = none
+	1 = rain
+	2 = snow
+	3 = bird
+[num]sweepTime --map sweep time
+[bool]canTalk --map can talk
+[bool]showGhosts --map show ghosts
+[num]region --map region
+[num]indoor --map indoor
+[num]warpOut --map warpout
+
+MAP SET ATTRIBUTES
+
+[string]mapTitle --map title
+[num]bgm --map bgm
+[num]pvp --map pvp value
+	0 = off
+	1 = pvp
+	2 = pk
+[bool]spell --map can use spells
+[num]light --light number
+[num]weather --weather number:
+	0 = none
+	1 = rain
+	2 = snow
+	3 = bird
+[num]sweepTime --map sweep time
+[bool]canTalk --map can talk
+[bool]showGhosts --map show ghosts
+[num]region --map region
+[num]indoor --map indoor
+[num]warpOut --map warpout
+
+MENUS
+
+menu([string]message, [table]options) --light background, usually for yes/no or few options, OK, UP, CLOSE; returns location of option selected by user
+menuSeq([string], [table]options) --same as above, OK, NEXT, PREV, CLOSE
+input([string]message) --get user input
+popUp([string]message) --ok only
+dialog([string]message, [table]graphics) --close only; graphic, text
+dialogSeq({[table]graphics, [string]message[, [table]graphics, [string]message,...]},[bool]Continue) --Next/Prev Close; graphic, text, seq[, text, seq, ...]
+buy([string]message, [table]items, [table]prices) --text, idtable, pricetable
+sell([string]message, [table]items) --text, idtable
+sell2([string]message, [table]items) --text, idtable (not sure on difference)

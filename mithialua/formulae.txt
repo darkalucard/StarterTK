@@ -1,0 +1,82 @@
+REMOVE WEAPON DURA
+
+if crit and randomseed(100) > weapduramod and weapduramod > 1
+	remove dura random(1-5)
+else if randomseed(100) > weapduramod
+	remove dura 1
+
+REMOVE ARMOR DURA
+
+if crit and randomseed(100) > weapduramod and weapduramod > 1
+	remove dura random(1-5)
+else if randomseed(100) > weapduramod
+	remove dura 1
+	
+PLAYER HIT CALCULATION
+
+minhit = 5
+maxhit = 95
+
+hitchance = (55 + (grace / 2)) - (targetgrace / 2) + (hit * 1.5) + (level - targetlevel)
+
+2 hit : 3 level : 6 grace
+
+if randomseed(100) < hitchance
+	calculate critical
+
+PLAYER CRIT CALCULATION
+
+mincrit = 1
+maxcrit = 99
+
+grace - level*1.5 + grace/2 - might/3 + hit/2 + hit - dam
+
+critchance = hit / 3
+
+3 hit : 1% crit
+
+if randomseed(100) < critchance --same randomseed from hit
+	crit
+else
+	hit
+
+PLAYER DAMAGE CALCULATION
+
+MOB HIT CALCULATION
+
+minhit = 5
+maxhit = 85
+
+hitchance = (55 + (grace)) - (targetgrace / 2) + (hit) + (level - targetlevel / 2)
+
+1 hit : 1 level : 1 grace
+
+if randomseed(100) < hitchance
+	calculate critical
+
+MOB CRIT CALCULATION
+
+critchance = (hitchance * .05) + (hit * .5)
+
+if randomseed(100) < critchance --same randomseed from hit
+	crit
+else
+	hit
+	
+MOB DAMAGE CALCULATION
+
+
+
+
+
+-------------
+REGEN
+-------------
+
+maxHealth * 0.01
++ (maxHealth * ((regens * 0.00025) + (regens^2) * 0.00000625) * 2)
+
+
+
+maxMagic * .0085
++ (maxMagic * ((regens) + (will / 5) + (regens^2) * 0.00000625)) * 0.00042;

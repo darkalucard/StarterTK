@@ -1,0 +1,12 @@
+Scripts in general can be called from within other scripts by using the following syntax:
+	script.function
+
+Returning a value from another function can contain any value, if a block is returned (such as player), then every aspect of this block can be manipulated after return.
+
+To make a mob not give exp make 'mob.attacker = 0' during the on_death function of a mob's AI.
+
+
+CoM has 364 days
+91 days per season
+4 seasons
+450s IRL == 1 CoM hour

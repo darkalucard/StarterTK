@@ -1,0 +1,51 @@
+	
+
+	after_death=function(mob,player)
+	local gMember
+	local calc=0
+	local rand=0
+	local cho=0
+
+	for _,gID in pairs(player.group) do
+	gMember=Player(gID)
+		if(gMember.class==1) then
+			calc=calc+1
+			break
+		end
+	end
+
+	for _,gID in pairs(player.group) do
+	gMember=Player(gID)
+		if(gMember.class==2) then
+			calc=calc+1
+			break
+		end
+	end
+
+	for _,gID in pairs(player.group) do
+	gMember=Player(gID)
+		if(gMember.class==3) then
+			calc=calc+1
+			break
+		end
+	end
+	
+	for _,gID in pairs(player.group) do
+	gMember=Player(gID)
+		if(gMember.class==4) then
+			calc=calc+1
+			break
+		end
+	end
+
+	if(calc>=1) then
+		rand=math.random(1,2)
+		if(rand==1) then
+			cho=math.random(1,#player.group)
+			Player(player.group[cho]):addItem(161,1)
+			for _,gID in pairs(player.group) do
+				gMember=Player(gID)
+				gMember:sendMinitext(Player(player.group[cho]).name .. " received a recipe.")
+			end
+		end
+	end

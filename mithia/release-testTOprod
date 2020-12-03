@@ -1,0 +1,20 @@
+#!/bin/bash
+
+curDate=`date +%F`;
+echo $curDate;
+mysqldump -u Jacob -pp0Op1eD5 -h localhost --single-transaction mithia BoardNames BoardTitles Items Maps MobEquipment Mobs NPCEquipment NPCs Paths Spawns Spells > mithiaRelease-$curDate.sql;
+
+if [ $? -eq 0 ]
+then
+	echo 'Release SQL received.';
+	mysql -u Jacob -pp0Op1eD5 -h comithia.com mithia < mithiaRelease-$curDate.sql;
+	
+	if [ $? -eq 0 ]
+	then
+		echo 'Release SQL sent.';
+	else
+		echo 'Error sending release.';
+	fi
+else
+	echo 'Error dumping release.';
+fi
