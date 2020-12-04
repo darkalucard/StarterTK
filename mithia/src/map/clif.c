@@ -8840,7 +8840,7 @@ int clif_addtocurrent(struct block_list *bl, va_list ap) {
 
 	if(def[0]) return 0;
 
-	if(fl->data.id==0) {
+	if(fl->data.id<=10) {
 			fl->data.amount+=amount;
 			//fl->gone_tick=0;
 			if(fl->timer) timer_remove(fl->timer);
@@ -8852,8 +8852,9 @@ int clif_addtocurrent(struct block_list *bl, va_list ap) {
 }
 int clif_dropgold(USER *sd, unsigned int amounts) {
 	char escape[255];
-      char RegStr[]="goldbardupe";
-      int DupeTimes=pc_readglobalreg(sd, RegStr);
+    char RegStr[]="goldbardupe";
+    int DupeTimes=pc_readglobalreg(sd, RegStr);
+	int itemID = 0;
       if(DupeTimes)
       {
         //char minibuf[]="Character under quarentine.";
@@ -8889,8 +8890,11 @@ int clif_dropgold(USER *sd, unsigned int amounts) {
 	} else {
 		sd->status.money-=amount;
 	}
-	fl->data.id=0;
-	fl->data.amount=amount;
+
+	itemID = clif_getgolditemid(amount);
+
+	fl->data.id = itemID;
+	fl->data.amount = amount;
 
 	map_foreachincell(clif_addtocurrent,sd->bl.m,sd->bl.x,sd->bl.y,BL_ITEM,def,amount);
 	Sql_EscapeString(sql_handle,escape,fl->data.real_name);
@@ -13047,3 +13051,45 @@ int clif_switchchar(USER *sd, char* name, char* pass) {
 	SqlStmt_Free(stmt);
 	return 1;
 }*/
+
+int clif_getgolditemid(int amounts) {
+	int itemID=0;
+
+	switch(amounts) {
+		case 1:
+			itemID=0;
+			break;
+		case 2 ... 100:
+			itemID=1;
+			break;
+		case 101 ... 500:
+			itemID=2;
+			break;
+		case 501 ... 1000:
+			itemID=3;
+			break;
+		case 1001 ... 5000:
+			itemID=4;
+			break;
+		case 5001 ... 10000:
+			itemID=5;
+			break;
+		case 10001 ... 50000:
+			itemID=6;
+			break;
+		case 50001 ... 100000:
+			itemID=7;
+			break;
+		case 100001 ... 500000:
+			itemID=8;
+			break;
+		case 500001 ... 1000000:
+			itemID=9;
+			break;
+		default:
+			return 10;
+			break;
+	}
+
+	return itemID;
+}

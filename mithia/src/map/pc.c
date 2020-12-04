@@ -1712,7 +1712,7 @@ int pc_getitemscript(USER *sd, int id) {
 	int add=0;
 	char escape[255];
 
-	if(fl->data.id==0) {
+	if(fl->data.id<=10) {
 		sd->status.money+=fl->data.amount;
 		clif_sendstatus(sd,SFLAG_XPMONEY);
 		clif_lookgone(&fl->bl);
