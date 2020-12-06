@@ -331,6 +331,181 @@ onSay = function(player)
 				break
 			end
 		end
+
+		-- GFX Color
+		if lspeech == "hairc" then
+			player:sendMinitext("Hair color: " .. p.hairColor)
+			printf = 0
+		elseif lspeech == "nhairc" then
+			p.hairColor = p.hairColor + 1
+			player:sendMinitext("Hair color: " .. p.hairColor)
+			printf = 0
+			player:updateState()
+		elseif lspeech == "phairc" then
+			if p.hairColor <= 0 then
+				player:sendMinitext("Hair color: " .. p.hairColor)
+				return
+			else
+				p.hairColor = p.hairColor - 1
+			end
+			player:sendMinitext("Hair color: " .. p.hairColor)
+			printf = 0
+			player:updateState()
+		elseif lspeech == "nhelmc" then
+			p.gfxHelmC = p.gfxHelmC + 1
+			player:sendMinitext("Helm Color: " .. p.gfxHelmC)
+			printf = 0
+			player:updateState()
+		elseif lspeech == "phelmc" then
+			if p.gfxHelmC <= 0 then
+				player:sendMinitext("Helm Color: " .. p.gfxHelmC)
+				return
+			else
+				p.gfxHelmC = p.gfxHelmC - 1
+			end
+			player:sendMinitext("Helm Color: " .. p.gfxHelmC)
+			printf = 0
+			player:updateState()
+		elseif lspeech == "helmc" then
+			player:sendMinitext("Helm Color: " .. p.gfxHelmC)
+			printf = 0
+		elseif lspeech == "nweapc" then
+			p.gfxWeapC = p.gfxWeapC + 1
+			player:sendMinitext("Weapon Color: " .. player.gfxWeapC)
+			printf = 0
+			player:updateState()
+		elseif lspeech == "pweapc" then
+			if p.gfxWeapC <= 0 then
+				player:sendMinitext("Weapon Color: " .. player.gfxWeapC)
+				return
+			else
+				p.gfxWeapC = p.gfxWeapC - 1
+			end
+			player:sendMinitext("Weapon Color: " .. player.gfxWeapC)
+			printf = 0
+			player:updateState()
+		elseif lspeech == "nshieldc" then
+			p.gfxShieldC = p.gfxShieldC + 1
+			player:sendMinitext("Shield Color: " .. p.gfxShieldC)
+			printf = 0
+			player:updateState()
+		elseif lspeech == "pshieldc" then
+			if p.gfxShieldC <= 0 then
+				p:sendMinitext("Shield Color: " .. p.gfxShieldC)
+				return
+			else
+				p.gfxShieldC = p.gfxShieldC - 1
+			end
+			p:sendMinitext("Shield Color: " .. p.gfxShieldC)
+			printf = 0
+			player:updateState()
+		elseif lspeech == "narmorc" then
+			p.gfxArmorC = p.gfxArmorC + 1
+			player:sendMinitext("Armor Color: " .. player.gfxArmorC)
+			printf = 0
+			player:updateState()
+		elseif lspeech == "parmorc" then
+			if p.gfxArmorC <= 0 then
+				player:sendMinitext("Armor Color: " .. player.gfxArmorC)
+				return
+			else
+				p.gfxArmorC = p.gfxArmorC - 1
+			end
+			player:sendMinitext("Armor Color: " .. player.gfxArmorC)
+			printf = 0
+			player:updateState()
+		elseif lspeech == "ncrownc" then
+			p.gfxCrownC = p.gfxCrownC + 1
+			player:sendMinitext("Crown Color: " .. player.gfxCrownC)
+			printf = 0
+			player:updateState()
+		elseif lspeech == "pcrownc" then
+			if p.gfxCrownC <= 0 then
+				player:sendMinitext("Crown Color: " .. player.gfxCrownC)
+				return
+			else
+				p.gfxCrownC = p.gfxCrownC - 1
+			end
+			player:sendMinitext("Crown Color: " .. player.gfxCrownC)
+			printf = 0
+			player:updateState()
+		elseif lspeech == "nbootsc" then
+			p.gfxBootsC = p.gfxBootsC + 1
+			player:sendMinitext("Boots Color: " .. player.gfxBootsC)
+			printf = 0
+			player:updateState()
+		elseif lspeech == "pbootsc" then
+			if p.gfxBootsC <= 0 then
+				player:sendMinitext("Boots Color: " .. player.gfxBootsC)
+				return
+			else
+				p.gfxBootsC = p.gfxBootsC - 1
+			end
+			player:sendMinitext("Boots Color: " .. player.gfxBootsC)
+			printf = 0
+			player:updateState()
+		elseif lspeech == "crownc" then
+			player:sendMinitext("Crown Color: " .. player.gfxCrownC)
+			printf = 0
+		elseif lspeech == "armorc" then
+			player:sendMinitext("Armor Color: " .. player.gfxArmorC)
+			printf = 0
+		elseif lspeech == "weapc" then
+			player:sendMinitext("Weapon Color: " .. player.gfxWeapC)
+			printf = 0
+		elseif lspeech == "shieldc" then
+			player:sendMinitext("Shield Color: " .. player.gfxShieldC)
+			printf = 0
+		elseif lspeech == "bootsc" then
+			player:sendMinitext("Boots Color: " .. player.gfxBootsC)
+			printf = 0
+		elseif lspeech == "nfacec" then
+			if p.gfxFaceC < 0 then
+				player:sendMinitext("Face Color: " .. player.gfxFaceC)
+				return
+			else
+				p.gfxFaceC = p.gfxFaceC + 1
+			end
+			player:sendMinitext("Face Color: " .. player.gfxFaceC)
+			printf = 0
+			player:updateState()
+		elseif lspeech == "pfacec" then
+			if p.gfxFaceC < 0 then
+				player:sendMinitext("Face Color: " .. player.gfxFaceC)
+				return
+			else
+				p.gfxFaceC = p.gfxFaceC - 1
+			end
+			player:sendMinitext("Face Color: " .. player.gfxFaceC)
+			printf = 0
+			player:updateState()
+		elseif lspeech == "facec" then
+			player:sendMinitext("Face Color: " .. player.gfxFaceC)
+			printf = 0
+		elseif lspeech == "nfaceac" then
+			if p.gfxFaceAC < 0 then
+				player:sendMinitext("Face Acc Color: " .. player.gfxFaceAC)
+				return
+			else
+				p.gfxFaceAC = p.gfxFaceAC + 1
+			end
+			player:sendMinitext("Face Acc Color: " .. player.gfxFaceAC)
+			printf = 0
+			player:updateState()
+		elseif lspeech == "pfaceac" then
+			if p.gfxFaceAC < 0 then
+				player:sendMinitext("Face Acc Color: " .. player.gfxFaceAC)
+				return
+			else
+				p.gfxFaceAC = p.gfxFaceAC - 1
+			end
+			player:sendMinitext("Face Acc Color: " .. player.gfxFaceAC)
+			printf = 0
+			player:updateState()
+		elseif lspeech == "faceac" then
+			player:sendMinitext("Face Acc Color: " .. player.gfxFaceAC)
+			printf = 0
+		end
 		
 		if (string.match(lspeech, "icon (%d+)") ~= nil and string.match(lspeech, "icon %d+ (%d+)") == nil) then
 			local x = tonumber(string.match(lspeech, "icon (%d+)"))
